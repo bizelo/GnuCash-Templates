@@ -1,6 +1,6 @@
 # Sleek Modern Invoice (GNUCash)
 
-A modern, CSS-driven invoice stylesheet for **GNUCash**, designed to provide a more modern look to the default invoice appearance.
+A modern, CSS-driven invoice stylesheet for **GNUCash**, designed to significantly improve the default invoice appearance while remaining fully compatible with GNUCash’s built-in reporting system.
 
 This stylesheet focuses on:
 - A clean, card-based layout
@@ -46,14 +46,29 @@ GNUCash’s stylesheet option system can behave differently across versions and 
 
 ---
 
-## Installation (macOS)
+## Installation (All Platforms)
+
+GNUCash loads user configuration files from the directory specified by the
+`GNC_CONFIG_HOME` environment variable.
+
+If `GNC_CONFIG_HOME` is **not set**, GNUCash defaults to a platform-specific
+configuration directory, commonly:
+
+- **Linux / BSD**: `~/.config/gnucash`
+- **macOS**: `~/Library/Application Support/Gnucash`
+- **Windows**: `%APPDATA%\GnuCash`
+
+You can confirm the active configuration directory by checking the
+`GNC_CONFIG_HOME` environment variable or GNUCash documentation for your platform.
+
+---
 
 ### 1. Install the Scheme file
 
-Copy `config-user.scm` to:
+Copy `config-user.scm` into:
 
 ```
-~/Library/Application Support/Gnucash/config-user.scm
+$GNC_CONFIG_HOME/config-user.scm
 ```
 
 If a `config-user.scm` file already exists, merge the contents carefully.
@@ -62,10 +77,10 @@ If a `config-user.scm` file already exists, merge the contents carefully.
 
 ### 2. Install the CSS file
 
-Copy `sleek-modern-invoice.css` to:
+Copy `sleek-modern-invoice.css` into:
 
 ```
-~/Library/Application Support/Gnucash/sleek-modern-invoice.css
+$GNC_CONFIG_HOME/sleek-modern-invoice.css
 ```
 
 ---
