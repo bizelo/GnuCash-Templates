@@ -1,0 +1,266 @@
+/* =========================================================
+   Sleek Modern Invoice (GNUCash) - CSS only
+   Uses vars injected by config-user.scm:
+     --sb-accent
+     --sb-accent-85w, --sb-accent-55w, --sb-accent-25w, --sb-accent-45w
+     --sb-accent-12w, --sb-accent-35w
+     --sb-accent-rgba35, --sb-accent-rgba28
+     --sb-logo-url
+   ========================================================= */
+
+:root{
+  --sb-ink: #0b0b0f;
+  --sb-text: #111827;
+  --sb-muted: #6b7280;
+  --sb-border: rgba(17,24,39,.12);
+  --sb-card: #ffffff;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+
+  --shadow-1: 0 10px 30px rgba(0,0,0,.10);
+  --shadow-2: 0 2px 10px rgba(0,0,0,.08);
+
+  --pad-page: 28px;
+  --pad-card: 22px;
+
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, "Helvetica Neue", "Noto Sans", sans-serif;
+}
+
+html, body { height: auto !important; }
+body{
+  margin: 0 !important;
+  padding: var(--pad-page) !important;
+  font-family: var(--font) !important;
+  font-size: 11pt !important;
+  line-height: 1.45 !important;
+  color: var(--sb-text) !important;
+  background:
+    radial-gradient(1200px 600px at 20% 0%, var(--sb-accent-rgba35), rgba(255,255,255,0) 55%),
+    radial-gradient(900px 500px at 80% 10%, var(--sb-accent-rgba28), rgba(255,255,255,0) 60%),
+    #fafafa !important;
+}
+
+/* Main card */
+.main-table > table{
+  position: relative !important;
+  width: min(980px, 100%) !important;
+  margin: 0 auto !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: var(--sb-card) !important;
+  border: 1px solid var(--sb-border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-1) !important;
+  overflow: hidden !important;
+}
+
+.main-table td{
+  padding: 0 !important;
+  vertical-align: top !important;
+}
+
+/* Header band */
+.main-table tr:first-child td{
+  padding: var(--pad-card) !important;
+  background: linear-gradient(135deg, var(--sb-accent-85w), var(--sb-accent-55w)) !important;
+  border-bottom: 1px solid rgba(0,0,0,.10) !important;
+}
+
+/* Title */
+.invoice-title{
+  position: relative !important;
+  display: block !important;
+  padding: 10px 14px 10px 64px !important;
+  font-size: 20pt !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--sb-ink) !important;
+  border-radius: var(--radius-md) !important;
+  background: rgba(255,255,255,.55) !important;
+  box-shadow: var(--shadow-2) !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+}
+
+/* Logo from options */
+.invoice-title::before{
+  content: "" !important;
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 12px !important;
+  background-image: var(--sb-logo-url) !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.14) !important;
+  border: 1px solid rgba(0,0,0,.10) !important;
+  background-color: rgba(255,255,255,.35) !important;
+}
+
+/* Hide logo tile if no logo chosen */
+.invoice-title[style]::before{ /* noop hook for older webkit */ }
+:root[style] .invoice-title::before{ /* noop hook */ }
+.invoice-title::before{
+  /* if --sb-logo-url is 'none', background-image is none and this looks like a blank tile.
+     Hide the tile entirely by also zeroing the shadow/border when none. */
+  background-color: rgba(255,255,255,.35) !important;
+}
+:root{
+  /* when none, the following don't apply, so tile will still exist; keep subtle. */
+}
+
+/* Section padding */
+.main-table tr:nth-child(2) td,
+.main-table tr:nth-child(3) td,
+.main-table tr:nth-child(4) td{
+  padding: 14px var(--pad-card) !important;
+}
+.main-table tr:nth-child(2) td,
+.main-table tr:nth-child(3) td{
+  border-bottom: 1px solid var(--sb-border) !important;
+}
+
+/* Date pill */
+.invoice-print-date{
+  display: inline-block !important;
+  padding: 6px 10px !important;
+  border-radius: 999px !important;
+  background: var(--sb-accent-25w) !important;
+  border: 1px solid var(--sb-accent-45w) !important;
+  color: var(--sb-ink) !important;
+  font-weight: 700 !important;
+}
+
+/* Mini cards */
+.client-table, .company-table, .invoice-details-table{
+  display: inline-block !important;
+  background: #fff !important;
+  border: 1px solid var(--sb-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,.06) !important;
+  padding: 12px 14px !important;
+}
+
+/* Company block top-left (compact) */
+.company-table{
+  position: absolute !important;
+  left: var(--pad-card) !important;
+  top: 104px !important;
+  width: 44% !important;
+  max-width: 440px !important;
+  padding: 10px 12px !important;
+}
+.company-table, .company-table *{ float: none !important; }
+.company-table .maybe-align-right{ text-align: left !important; }
+.company-table > table td{ padding: 0 !important; }
+
+.client-name, .company-name{
+  font-size: 12.5pt !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--sb-ink) !important;
+  margin-bottom: 6px !important;
+}
+.client-address, .company-address{
+  color: var(--sb-muted) !important;
+  line-height: 1.35 !important;
+}
+.company-email, .company-url{
+  margin-top: 6px !important;
+  font-weight: 650 !important;
+  color: var(--sb-text) !important;
+}
+.company-url{ color: var(--sb-ink) !important; }
+
+.div-align-right{ float: right !important; }
+.div-align-right .maybe-align-right{ text-align: right !important; }
+
+/* Entries table */
+.entries-table{ padding: 0 var(--pad-card) var(--pad-card) !important; }
+.entries-table > table{
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border: 1px solid var(--sb-border) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 26px rgba(0,0,0,.06) !important;
+}
+.entries-table *{ border: none !important; }
+
+.entries-table thead th{
+  text-align: left !important;
+  padding: 12px 12px !important;
+  font-size: 10.5pt !important;
+  font-weight: 850 !important;
+  letter-spacing: .02em !important;
+  color: var(--sb-ink) !important;
+  background: linear-gradient(135deg, var(--sb-accent-85w), var(--sb-accent-55w)) !important;
+  border-bottom: 1px solid rgba(0,0,0,.12) !important;
+}
+
+.entries-table tbody td{
+  padding: 10px 12px !important;
+  border-bottom: 1px solid var(--sb-border) !important;
+  color: var(--sb-text) !important;
+}
+
+.entries-table tbody tr:nth-child(odd) td{ background: #ffffff !important; }
+.entries-table tbody tr:nth-child(even) td{ background: rgba(17,24,39,.02) !important; }
+
+td.number-cell, td.total-number-cell{
+  text-align: right !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums !important;
+}
+td.date-cell{ white-space: nowrap !important; color: var(--sb-muted) !important; }
+
+td.total-label-cell, td.total-number-cell{
+  font-size: 12pt !important;
+  font-weight: 900 !important;
+}
+
+/* Total rows highlight without color-mix */
+.entries-table tbody tr:has(td.total-label-cell) td{
+  background: var(--sb-accent-12w) !important;
+  border-bottom: 1px solid var(--sb-accent-35w) !important;
+}
+.entries-table tbody tr:has(td.total-label-cell) td.total-label-cell,
+.entries-table tbody tr:has(td.total-label-cell) td.total-number-cell{
+  color: var(--sb-ink) !important;
+}
+
+td.neg{ color: #b91c1c !important; font-weight: 850 !important; }
+
+/* Notes */
+.invoice-notes{
+  padding: 18px var(--pad-card) 22px !important;
+  color: var(--sb-muted) !important;
+  border-top: 1px solid var(--sb-border) !important;
+}
+.invoice-notes::before{
+  content: "⚡ " !important;
+  color: var(--sb-ink) !important;
+  font-weight: 900 !important;
+}
+
+/* Links */
+a{
+  color: var(--sb-ink) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(11,11,15,.25) !important;
+}
+a:hover{ border-bottom-color: rgba(11,11,15,.6) !important; }
+
+/* Print */
+@media print{
+  body{ background: #fff !important; padding: 0 !important; }
+  .main-table > table{ box-shadow: none !important; border: 0 !important; }
+  .entries-table > table{ box-shadow: none !important; }
+}
